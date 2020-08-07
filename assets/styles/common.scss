@@ -1,0 +1,140 @@
+@import './variables.scss';
+
+.input-field {
+	color: #253858;
+	display: flex;
+}
+
+.mandatory-marker {
+	color: $error-color;
+}
+
+.error-message {
+	margin-top: 10px;
+	color: $error-color;
+	font-size: 13px;
+}
+
+.error-border {
+	border: 1px solid #FF5766 !important;
+}
+
+.field-label {
+	margin-bottom: 5px !important;
+}
+
+input[type=text],
+input[type=number],
+input[type=password],
+textarea {
+	border-radius: 4px;
+	background-color: $white-clr;
+	border: solid 1px #d7dee8;
+	color: $input-text-clr;
+	font-size: 15px;
+	font-weight: 400;
+	height: 46px;
+	outline: none;
+	padding: 0 10px;
+	width: 100%;
+	&::-webkit-input-placeholder {
+		/* Chrome/Opera/Safari */
+		color: $dark-grey;
+		font-size: 15px;
+	}
+
+	&::-moz-placeholder {
+		/* Firefox 19+ */
+		color: $dark-grey;
+		font-size: 15px;
+	}
+
+	&:-ms-input-placeholder {
+		/* IE 10+ */
+		color: $dark-grey;
+		font-size: 15px;
+	}
+
+	&:-moz-placeholder {
+		/* Firefox 18- */
+		color: $dark-grey;
+		font-size: 15px;
+	}
+}
+
+textarea {
+	height: 60px;
+	;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.m-b-15 {
+	margin-bottom: 15px;
+}
+
+.m-r-10 {
+	margin-right: 10px;
+}
+
+.m-b-10 {
+	margin-bottom: 10px;
+}
+
+.p-t-15 {
+	padding-top: 15px;
+}
+
+.m-l-15 {
+	margin-left: 15px;
+}
+
+.m-r-15 {
+	margin-right: 15px;
+}
+
+.m-t-35 {
+	margin-top: 35px;
+}
+
+.mt20 {
+	margin-top: 20px;
+}
+
+.Select--multi {
+	.Select-value {
+		color: $primary-theme-clr !important;
+	}
+}
+
+.active-btn {
+	font-size: 15px;
+	padding: 10px 20px;
+	text-align: center;
+	color: #f8f9fa;
+	width: 90px;
+	background-color: $primary-theme-clr;
+}
+
+.cancel-btn {
+	font-size: 15px;
+	padding: 10px 20px;
+	text-align: center;
+	color: #f8f9fa;
+	width: 90px;
+	background-color: $white-clr !important;
+	border: solid 1px $primary-theme-clr;
+	color: $primary-theme-clr;
+}
+
+#chart-container {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	width: 100%;
+	height: 400px;
+	background-color: $white-clr;
+}

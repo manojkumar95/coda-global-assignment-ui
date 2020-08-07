@@ -1,0 +1,16 @@
+.DS_Store
+
+cache/
+dist/
+node_modules/
+.sass-cache/
+.tmp/
+.vagrant/
+.vscode/
+*.map
+*.rdb
+/logs
+tmp/
+tmp/
+*.log
+.env
