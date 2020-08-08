@@ -2,7 +2,7 @@
 
 - Visit [App link](http:1322.4234.32) to view the application hosted on AWS EC2 free tier instance
 - View [Frontend Repo](https://github.com/manojkumar95/coda-global-assignment-ui.git)
-- View [Backend Repo](https://github.com/manojkumar95/coda-global-assignment-ui.git)
+- View [Backend Repo](https://github.com/manojkumar95/coda-global-assignment-api.git)
 
 
 ## Prerequisites

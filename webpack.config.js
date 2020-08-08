@@ -27,6 +27,9 @@ module.exports = {
     publicPath: '/'
     // libraryTarget: 'amd'
   },
+  node: {
+    fs: 'empty'
+  },
   // target: 'node',
 //   externals: [nodeExternals({
 //     importType: 'umd'
