@@ -10,7 +10,7 @@ import 'bootstrap';
 import { NotificationContainer } from 'react-notifications';
 import { Provider } from 'react-redux';
 import 'babel-polyfill';
-import store from './store/index';
+import configureStore from './store/index';
 import setupAxiosInterceptors from './globals/interceptors';
 import { AppRoutes } from './router';
 import '../assets/styles/index.scss';
@@ -20,12 +20,23 @@ if (module.hot) {
   module.hot.accept();
 }
 
-setupAxiosInterceptors(store);
+const init = async() => {
+  try {
+    const store = await configureStore()
 
-ReactDOM.render(
-  <Provider store={store}>
-    {AppRoutes(store)}
-    <NotificationContainer />
-  </Provider>,
-  document.getElementById('app')
-);
+    setupAxiosInterceptors(store);
+
+    ReactDOM.render(
+      <Provider store={store}>
+        {AppRoutes(store)}
+        <NotificationContainer />
+      </Provider>,
+      document.getElementById('app')
+    );
+
+  } catch (err) {
+    console.error('Error while initializing the app', err)
+  }
+}
+
+init()

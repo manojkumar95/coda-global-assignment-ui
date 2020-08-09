@@ -4,9 +4,7 @@ import {
   takeLatest
 } from 'redux-saga/effects';
 import axios from 'axios';
-import {
-  history
-} from 'router';
+import { history } from '../router';
 
 import {
   LOGIN,
@@ -33,7 +31,7 @@ function* login(action) {
   } = action;
   console.log('payload', payload);
   try {
-    const response = yield call(axios, '/brand/login', {
+    const response = yield call(axios, '/users/login', {
       method: 'POST',
       data: payload
     });
@@ -48,7 +46,7 @@ function* login(action) {
 function* onLoginSuccess(action) {
   const data = action.payload;
   cacheAuthToken(data);
-  history.push('/');
+  history.push('/home');
 }
 
 function* onSignUp(action) {
@@ -99,7 +97,6 @@ const cacheAuthToken = res => {
     return;
   }
   window.localStorage.setItem(LOGIN_TOKEN, JSON.stringify({
-    authToken: res.token,
-    expires: res.expires
+    authToken: res.authToken
   }));
 };

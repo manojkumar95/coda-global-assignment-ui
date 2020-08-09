@@ -1,26 +1,16 @@
 import React from 'react';
 import 'styles/Table.scss';
 
-const categories = [{
-  id: '123',
-  latitude: 123,
-  longitude: 123,
-  moisture: 'wet',
-  color: 'green'
-}
-];
-
-const Table = () => (
+const Table = ({ candidates = [], history }) => (
   <div className="table-container">
     <div className="table-container-head">
       <table>
         <thead>
           <tr className="head">
-            <th className="column1">Id</th>
-            <th className="column2">Latitude</th>
-            <th className="column3">Longitude</th>
-            <th className="column4">Moisture</th>
-            <th className="column5">Color</th>
+            <th className="column1">Candidate Id</th>
+            <th className="column2">Name</th>
+            <th className="column3">Number Of Votes</th>
+            <th className="column4">Actions</th>
           </tr>
         </thead>
       </table>
@@ -28,13 +18,26 @@ const Table = () => (
     <div className="table-container-body">
       <table>
         <tbody>
-          {categories.map(category => (
-            <tr className="body" key={category.id}>
-              <td className="column1" title={category.id}>{category.id}</td>
-              <td className="column2" title={category.latitude}>{category.latitude}</td>
-              <td className="column3" title={category.longitude}>{category.longitude}</td>
-              <td className="column4" title={category.moisture}>{category.moisture}</td>
-              <td className="column5" title={category.color}>{category.color}</td>
+          {candidates.map(candidate => (
+            <tr className="body" key={candidate._id}>
+              <td className="column1" title={candidate._id}>{candidate._id}</td>
+              <td className="column2" title={candidate.name}>{candidate.name}</td>
+              <td className="column3" title={candidate.numberOfVotes}>{candidate.numberOfVotes || 0}</td>
+              <td className="column4" title="Edit">
+              <span className="mr-3" onClick={() => {
+                  history.push(`/view-candidate/${candidate._id}`)
+                }}>
+                  <i className="fa fa-eye icon" aria-hidden="true" />
+                </span>
+                <span className="mr-3" onClick={() => {
+                  history.push(`/view-candidate/${candidate._id}`)
+                }}>
+                  <i className="fa fa-edit icon" aria-hidden="true" />
+                </span>
+                <span className="mr-3">
+                  <i className="fa fa-trash icon" aria-hidden="true" />
+                </span>
+              </td>
             </tr>
           ))}
         </tbody>

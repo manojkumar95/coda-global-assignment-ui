@@ -1,27 +1,50 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  compose,
+  combineReducers,
+  applyMiddleware
+} from 'redux'
 
 import createSagaMiddleware from 'redux-saga';
+import {
+  camelCase
+} from 'lodash'
 
-import rootReducer from '../reducers';
 import saga from '../saga';
 
-const sagaMiddleware = createSagaMiddleware();
-const enhancers = [
-  applyMiddleware(sagaMiddleware)
-];
+const sagaMiddleware = createSagaMiddleware()
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    // Prevent recomputing reducers for `replaceReducer`
-    shouldHotReload: true
+const importAll = r => {
+  const files = {}
+  r.keys().forEach(key => {
+    const reducerName = camelCase(key.replace(/(^.\/|.js$)/g, ''))
+    files[reducerName] = r(key).default
   })
-  : compose;
+  return files
+}
 
-const store = createStore(
-  rootReducer,
-  composeEnhancer(...enhancers)
-);
+const composeEnhancers = process.env.NODE_ENV !== 'production' && typeof window === 'object'
+  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    name: 'Agent | Happyfox Chat'
+  }) : compose
 
-sagaMiddleware.run(saga);
+const enhancer = composeEnhancers(
+  applyMiddleware(sagaMiddleware)
+)
 
-export default store;
+const reducers = importAll(require.context('../reducers', false, /\.js$/))
+const rootReducer = combineReducers(reducers)
+
+const configureStore = async() => {
+  try {
+    const store = createStore(rootReducer, enhancer)
+    sagaMiddleware.run(saga)
+
+    return store
+  } catch (err) {
+    console.error('Error while setting up sagas...')
+  }
+}
+
+export default configureStore;

@@ -8,8 +8,7 @@
     "dev": "NODE_ENV=dev webpack-dev-server --config webpack.config.dev.js --mode development",
     "build": "NODE_ENV=production webpack -p --progress --mode production --config webpack.config.build.js",
     "stats": "webpack --profile --json > stats.json",
-    "lint": "eslint .",
-    "postdev": "yarn run lint"
+    "lint": "eslint ."
   },
   "engines": {
     "node": ">=12.13.0"

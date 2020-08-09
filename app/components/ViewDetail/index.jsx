@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
-import Chart from './Chart';
+import { useDispatch, useSelector } from 'react-redux';
+// import Chart from './Chart';
 import Table from '../Common/Table';
 
-import { getBrand } from '../../actions/brand';
+import { getAllCandidates } from '../../actions/candidate';
 
-const ViewDetail = () => {
+import { getCandidates } from '../../selectors/candidate';
+
+const ViewDetail = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBrand());
+    dispatch(getAllCandidates());
   }, []);
 
+  const candidates = useSelector(state => getCandidates(state))
+  console.log('candidates', candidates)
   return (
     <div>
-      <Chart />
-      <Table />
+      {/* <Chart /> */}
+      <Table candidates={candidates} history={history} />
     </div>
   );
 };

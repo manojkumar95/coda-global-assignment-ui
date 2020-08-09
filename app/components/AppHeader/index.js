@@ -28,7 +28,7 @@ const AppHeader = () => (
               to="/view-sensor-data"
             >
               <i className="fa fa-list-alt" aria-hidden="true" />
-              View Data Charts
+              View Candidates
             </NavLink>
           </li>
         </ul>
