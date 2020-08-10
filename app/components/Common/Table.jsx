@@ -1,7 +1,7 @@
 import React from 'react';
 import 'styles/Table.scss';
 
-const Table = ({ candidates = [], history, currentUser = {} }) => (
+const Table = ({ candidates = [], history, currentUser = {}, onDelete }) => (
   <div className="table-container">
     <div className="table-container-head">
       <table>
@@ -37,7 +37,7 @@ const Table = ({ candidates = [], history, currentUser = {} }) => (
                       <i className="fa fa-edit icon" aria-hidden="true" />
                     </span>
                     <span className="mr-3">
-                      <i className="fa fa-trash icon" aria-hidden="true" />
+                      <i className="fa fa-trash icon" aria-hidden="true" onClick={() => onDelete(candidate._id)} />
                     </span>
 
                   </>

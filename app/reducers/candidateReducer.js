@@ -2,9 +2,9 @@ import {
   GET_CANDIDATES,
   GET_CANDIDATE_SUCCESS,
   GET_CANDIDATE_ERROR,
-  UPDATE_BRAND,
-  UPDATE_BRAND_SUCCESS,
-  UPDATE_BRAND_ERROR,
+  UPDATE_CANDIDATE,
+  UPDATE_CANDIDATE_SUCCESS,
+  UPDATE_CANDIDATE_ERROR,
   GET_CANDIDATE_BY_ID,
   GET_CANDIDATE_BY_ID_SUCCESS
 } from '../actions/candidate';
@@ -48,20 +48,6 @@ export default function (state = initialState, action) {
         ...state,
         candidate: action.response
       }
-    case UPDATE_BRAND:
-      return state
-        .set('loading', true);
-    case UPDATE_BRAND_SUCCESS:
-      return state
-        .set('brandId', action.brand.brand)
-        .set('firstName', action.brand.firstName)
-        .set('lastName', action.brand.lastName)
-        .set('phoneNumber', action.brand.phoneNumber)
-        .set('loading', false);
-    case UPDATE_BRAND_ERROR:
-      return state
-        .set('brandError', action.error)
-        .set('loading', false);
     case LOGIN_SUCCESS:
       const {
         userId, name, authToken, isVoted, isAdmin

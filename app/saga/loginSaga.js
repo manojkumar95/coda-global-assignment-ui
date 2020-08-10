@@ -59,20 +59,14 @@ function* onSignUp(action) {
     payload
   } = action;
   try {
-    const response = yield call(axios, '/brand/direct-signup', {
+    yield call(axios, '/users/signup', {
       method: 'POST',
       data: payload
     });
-    // yield put(loginSuccess(response));
-    history.push('/validate-email');
-    history.push({
-      pathname: '/validate-email',
-      state: {
-        detail: payload.email
-      }
-    });
+    Notification('success', 'User signed up successfully');
+    history.push('/login');
   } catch (e) {
-    Notification('error', 'Signup request failed. Please try again.');
+    Notification('error', 'User already exists. Try with different name');
     // yield put(loginError(e));
     console.error('Login failed', e);
   }

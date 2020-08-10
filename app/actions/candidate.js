@@ -2,9 +2,11 @@ export const GET_CANDIDATES = 'GET_CANDIDATES';
 export const GET_CANDIDATE_SUCCESS = 'GET_CANDIDATE_SUCCESS';
 export const GET_CANDIDATE_ERROR = 'GET_CANDIDATE_ERROR';
 
-export const UPDATE_BRAND = 'UPDATE_BRAND';
-export const UPDATE_BRAND_SUCCESS = 'UPDATE_BRAND_SUCCESS';
-export const UPDATE_BRAND_ERROR = 'UPDATE_BRAND_ERROR';
+export const UPDATE_CANDIDATE = 'UPDATE_CANDIDATE';
+export const UPDATE_CANDIDATE_SUCCESS = 'UPDATE_CANDIDATE_SUCCESS';
+export const UPDATE_CANDIDATE_ERROR = 'UPDATE_CANDIDATE_ERROR';
+
+export const DELETE_CANDIDATE = 'DELETE_CANDIDATE';
 
 export const GET_CANDIDATE_BY_ID = 'GET_CANDIDATE_BY_ID';
 export const GET_CANDIDATE_BY_ID_SUCCESS = 'GET_CANDIDATE_BY_ID_SUCCESS';
@@ -48,19 +50,24 @@ export const voteForCandidateSuccess = response => ({
   response
 });
 
-export const updateBrand = brandData => ({
-  type: UPDATE_BRAND,
-  payload: brandData
+export const updateCandidate = candidateData => ({
+  type: UPDATE_CANDIDATE,
+  payload: candidateData
 });
 
-export const updateBrandSuccess = brandId => ({
-  type: UPDATE_BRAND_SUCCESS,
-  payload: brandId
+export const deleteCandidate = candidateId => ({
+  type: DELETE_CANDIDATE,
+  payload: candidateId
 });
 
-export const updateBrandError = brandId => ({
-  type: UPDATE_BRAND_ERROR,
-  payload: brandId
+export const updateCandidateSuccess = candidateId => ({
+  type: UPDATE_CANDIDATE_SUCCESS,
+  payload: candidateId
+});
+
+export const updateCandidateError = candidateId => ({
+  type: UPDATE_CANDIDATE_ERROR,
+  payload: candidateId
 });
 
 export const loadHome = () => ({

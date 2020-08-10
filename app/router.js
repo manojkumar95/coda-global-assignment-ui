@@ -10,6 +10,7 @@ import ViewDetail from 'components/ViewDetail';
 const Home = lazy(() => import('components/Home'));
 const Login = lazy(() => import('components/Login'));
 const ViewCandidate = lazy(() => import('components/ViewCandidate'));
+const SignUp = lazy(() => import('components/SignUp'));
 
 const RedirectToHome = () => (
   <Redirect to="/home" />
@@ -60,6 +61,7 @@ export const AppRoutes = () => {
         <Switch>
           {/* <Route path="/:tab" component={Home} /> */}
           <LoginRoute path='/login' />
+          <Route exact path='/signup' component={SignUp} />
           {/* <Route component={RedirectToHome} /> */}
           <PrivateRoute path='/:tab' component={Home} />
           <PrivateRoute exact path='/' component={RedirectToHome} />

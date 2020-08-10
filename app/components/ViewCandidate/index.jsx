@@ -28,10 +28,17 @@ const ViewCandidate = (props) => {
     }))
   }
 
+  const widthClassNames = {
+    1: 'width20',
+    2: 'width40',
+    3: 'width60',
+    4: 'width80',
+    5: 'width100'
+  }
   return (
     <div className="card-container">
       <div className="card">
-        <div class="card-content">
+        <div className="card-content">
 
           <div className="card-block">
             <span className="card-title">Candidate Id:</span>
@@ -56,6 +63,21 @@ const ViewCandidate = (props) => {
           <div className="card-block">
             <span className="card-title">Number Of Challenges Solved:</span>
             <span className="card-text">{candidateDetails.noOfChallengesSolved}</span>
+          </div>
+          <div className="card-block">
+            <div className="card-title">Skills:</div>
+            {/* <span className="card-text">{candidateDetails.noOfChallengesSolved}</span> */}
+            {
+              _.keys(candidateDetails.expertiseIn).map(language => (
+                <div className="skill-wrap" key={language}>
+                  <div className="card-title skill-title">{language}</div>
+                  <span className="skill-container">
+
+                    <div className={classNames('skills', `${widthClassNames[candidateDetails.expertiseIn[language]]}`)}>{candidateDetails.expertiseIn[language]}</div>
+                  </span>
+                </div>
+              ))
+            }
           </div>
           <div className="btn-section">
             <button className={classNames('login-btn', { 'disabled': currentUser.isVoted })} type="submit" onClick={voteForCandidateByUserId}>

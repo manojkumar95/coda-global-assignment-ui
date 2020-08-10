@@ -7,16 +7,16 @@ import {
 import {
   getCandidateSuccess,
   getCandidateError,
-  updateBrandError,
-  updateBrandSuccess,
   getCandidateByIdSuccess,
   GET_CANDIDATES,
-  UPDATE_BRAND,
+  UPDATE_CANDIDATE,
   GET_CANDIDATE_BY_ID,
   VOTE_FOR_CANDIDATE,
+  DELETE_CANDIDATE,
   getCandidateById,
   LOAD_HOME,
-  loadHome
+  loadHome,
+  getAllCandidates as fetchAllCandidates
 } from '../actions/candidate';
 import Notification from '../components/Notification';
 import { loginSuccess } from '../actions/login';
@@ -51,20 +51,20 @@ function* fetchCandidateById(action) {
 /**
  * Generator method to update candidate
  */
-function* updateBrand(action) {
+function* updateCandidate(action) {
   try {
     const {
-      brandData
+      candidateData
     } = action;
-    yield call(axios, '/company/offline', {
+    yield call(axios, `/candidates/${candidateData._id}`, {
       method: 'POST',
-      data: {}
+      data: candidateData
     });
-    yield put(updateBrandSuccess(brandData));
+    // yield put(updateCandidateSuccess(candidateData));
     Notification('success', 'User updated successfully');
   } catch (e) {
     Notification('error', e.message);
-    yield put(updateBrandError(e));
+    // yield put(updateCandidateError(e));
   }
 }
 
@@ -86,7 +86,7 @@ function* voteForCandidateByUserId(action) {
     Notification('success', 'User voted for candidate successfully');
   } catch (e) {
     Notification('error', e.message);
-    yield put(updateBrandError(e));
+    // yield put(updateCandidateError(e));
   }
 }
 
@@ -101,6 +101,25 @@ function* loadUser() {
   }
 }
 
+/**
+ * Generator method to delete candidate
+ */
+function* deleteCandidate(action) {
+  try {
+    const {
+      payload
+    } = action;
+    yield call(axios, `/candidates/${payload}`, {
+      method: 'DELETE'
+    });
+    yield put(fetchAllCandidates());
+    Notification('success', 'Candidate deleted successfully');
+  } catch (e) {
+    Notification('error', e.message);
+    // yield put(updateCandidateError(e));
+  }
+}
+
 export default function* saga() {
   // Methods for userSaga
   yield takeLatest(GET_CANDIDATES, getAllCandidates);
@@ -108,5 +127,6 @@ export default function* saga() {
   yield takeLatest(VOTE_FOR_CANDIDATE, voteForCandidateByUserId);
   yield takeLatest(LOAD_HOME, loadUser);
 
-  yield takeLatest(UPDATE_BRAND, updateBrand);
+  yield takeLatest(UPDATE_CANDIDATE, updateCandidate);
+  yield takeLatest(DELETE_CANDIDATE, deleteCandidate);
 }

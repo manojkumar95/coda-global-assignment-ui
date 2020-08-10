@@ -29,12 +29,12 @@ const Login = () => {
                         </div>
                         <div className="heading-text">
                             <div className="login-text">Log into CODA GLOBAL</div>
-                            {/* <div className="signup-section">
+                            <div className="signup-section">
                                 <span className="signup-text">Don't have an account?</span>
                                 <span className="pl-1">
                                     <Link className="signup-link" to="/signup">Sign Up</Link>
                                 </span>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
