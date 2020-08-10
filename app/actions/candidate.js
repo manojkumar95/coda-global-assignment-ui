@@ -23,8 +23,9 @@ export const getCandidateSuccess = response => ({
   response
 });
 
-export const getCandidateError = () => ({
-  type: GET_CANDIDATE_ERROR
+export const getCandidateError = error => ({
+  type: GET_CANDIDATE_ERROR,
+  error
 });
 
 export const getCandidateById = candidateId => ({

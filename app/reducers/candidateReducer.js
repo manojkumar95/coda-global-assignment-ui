@@ -10,14 +10,14 @@ import {
 } from '../actions/candidate';
 
 import {
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_SUCCESS
 } from '../actions/login';
 
 const initialState = {
-  brandId: '',
-  firstName: '',
-  lastName: '',
-  brandError: ''
+  currentUser: {},
+  candidates: []
 };
 
 export default function (state = initialState, action) {
@@ -33,9 +33,11 @@ export default function (state = initialState, action) {
         candidates: action.response.candidates
       }
     case GET_CANDIDATE_ERROR:
-      return state
-        .set('brandError', action.error)
-        .set('loading', false);
+      return {
+        ...state,
+        candidateError: action.error,
+        loading: false
+      }
     case GET_CANDIDATE_BY_ID:
       return {
         ...state,
@@ -45,12 +47,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         candidate: action.response
-      }
-    case GET_CANDIDATE_ERROR:
-      return {
-        ...state,
-        brandError: action.error,
-          loading: false
       }
     case UPDATE_BRAND:
       return state
@@ -67,9 +63,8 @@ export default function (state = initialState, action) {
         .set('brandError', action.error)
         .set('loading', false);
     case LOGIN_SUCCESS:
-      console.log('action here', action);
       const {
-        userId, name, authToken, isVoted
+        userId, name, authToken, isVoted, isAdmin
       } = action.payload;
       return {
         ...state,
@@ -77,9 +72,18 @@ export default function (state = initialState, action) {
           name: name,
           userId,
           authToken,
-          isVoted
+          isVoted,
+          isAdmin
         }
-      }
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        loginError: action.err,
+        loading: false
+      };
+    case LOGOUT_SUCCESS:
+      return initialState;
     default:
         return state;
   }

@@ -10,21 +10,32 @@
 	top: 0;
 	max-height: 75px;
 	right: 0;
+
 	i {
 		color: $primary-theme-clr;
 		margin-right: 10px;
 	}
+
 	.theme-logo {
 		height: 32px;
 	}
-	.active-nav-link, .nav-link {
+
+	.active-nav-link,
+	.nav-link {
 		color: $black !important;
 	}
+
 	.user-title {
 		color: #3a3737;
 		font-size: 17px;
 	}
+
 	.nav-custom {
 		padding: 0.8rem 1rem;
+	}
+
+	.logout-icon {
+		font-size: 20px;
+		margin-top: 3px;
 	}
 }

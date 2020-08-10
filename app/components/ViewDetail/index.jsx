@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-// import Chart from './Chart';
 import Table from '../Common/Table';
 
 import { getAllCandidates } from '../../actions/candidate';
 
-import { getCandidates } from '../../selectors/candidate';
+import { getCandidates, getCurrentUser } from '../../selectors/candidate';
 
 const ViewDetail = ({ history }) => {
   const dispatch = useDispatch();
@@ -16,11 +15,15 @@ const ViewDetail = ({ history }) => {
   }, []);
 
   const candidates = useSelector(state => getCandidates(state))
-  console.log('candidates', candidates)
+  const currentUser = useSelector(state => getCurrentUser(state))
+
   return (
     <div>
-      {/* <Chart /> */}
-      <Table candidates={candidates} history={history} />
+      <Table
+        candidates={candidates}
+        history={history}
+        currentUser={currentUser}
+      />
     </div>
   );
 };

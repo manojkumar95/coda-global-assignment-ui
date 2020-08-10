@@ -45,9 +45,9 @@ const setupInterceptors = store => {
  * Set auth token as default in axios
  * @param token
  */
-export const setAuthToken = (token = storage.getItem('accessToken')) => {
+export const setAuthToken = (token) => {
   if (token) {
-    axios.defaults.headers.common.Authorization = token;
+    axios.defaults.headers.common['x-coda-global-app'] = token;
   }
 };
 

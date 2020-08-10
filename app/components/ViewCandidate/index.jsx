@@ -9,7 +9,6 @@ import { getCandidateById, getCurrentUser } from '../../selectors/candidate';
 import 'styles/ViewCandidate.scss';
 
 const ViewCandidate = (props) => {
-  console.log('props', props)
   const candidateId = _.get(props, 'match.params.candidateId');
   const dispatch = useDispatch();
 
@@ -32,8 +31,6 @@ const ViewCandidate = (props) => {
   return (
     <div className="card-container">
       <div className="card">
-        {/* <Chart /> */}
-        {/* <Table candidates={candidates} history={history} /> */}
         <div class="card-content">
 
           <div className="card-block">

@@ -15,8 +15,7 @@ const RedirectToHome = () => (
   <Redirect to="/home" />
 );
 
-const isBrandLoggedIn = (token) => {
-  console.log('token', token)
+const isUserLoggedIn = (token) => {
   if (!token) {
     return false
   }
@@ -33,8 +32,8 @@ export const AppRoutes = () => {
   const LoginRoute = ({ ...rest }) => (
     <Route
       {...rest} render={(props) => {
-        const token = window.localStorage.getItem('hfc-login-token')
-        const isLoggedIn = isBrandLoggedIn(token)
+        const token = window.localStorage.getItem('coda-login-token')
+        const isLoggedIn = isUserLoggedIn(token)
         return isLoggedIn ? <Home {...props} /> : <Login {...props} />
       }}
     />
@@ -43,8 +42,8 @@ export const AppRoutes = () => {
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest} render={(props) => {
-        const token = window.localStorage.getItem('hfc-login-token')
-        const isLoggedIn = isBrandLoggedIn(token)
+        const token = window.localStorage.getItem('coda-login-token')
+        const isLoggedIn = isUserLoggedIn(token)
 
         return isLoggedIn ? <Component {...props} /> : (
           <Redirect

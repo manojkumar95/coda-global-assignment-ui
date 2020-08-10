@@ -1,7 +1,7 @@
 import React from 'react';
 import 'styles/Table.scss';
 
-const Table = ({ candidates = [], history }) => (
+const Table = ({ candidates = [], history, currentUser = {} }) => (
   <div className="table-container">
     <div className="table-container-head">
       <table>
@@ -24,19 +24,24 @@ const Table = ({ candidates = [], history }) => (
               <td className="column2" title={candidate.name}>{candidate.name}</td>
               <td className="column3" title={candidate.numberOfVotes}>{candidate.numberOfVotes || 0}</td>
               <td className="column4" title="Edit">
-              <span className="mr-3" onClick={() => {
+                <span className="mr-3" onClick={() => {
                   history.push(`/view-candidate/${candidate._id}`)
                 }}>
                   <i className="fa fa-eye icon" aria-hidden="true" />
                 </span>
-                <span className="mr-3" onClick={() => {
-                  history.push(`/view-candidate/${candidate._id}`)
-                }}>
-                  <i className="fa fa-edit icon" aria-hidden="true" />
-                </span>
-                <span className="mr-3">
-                  <i className="fa fa-trash icon" aria-hidden="true" />
-                </span>
+                {(currentUser.isAdmin || currentUser.name === candidate.name) &&
+                  <>
+                    <span className="mr-3" onClick={() => {
+                      history.push(`/view-candidate/${candidate._id}`)
+                    }}>
+                      <i className="fa fa-edit icon" aria-hidden="true" />
+                    </span>
+                    <span className="mr-3">
+                      <i className="fa fa-trash icon" aria-hidden="true" />
+                    </span>
+
+                  </>
+                }
               </td>
             </tr>
           ))}

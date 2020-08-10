@@ -4,32 +4,36 @@ import {
   takeLatest
 } from 'redux-saga/effects';
 import axios from 'axios';
-import { history } from '../router';
+import {
+  history
+} from '../router';
 
 import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_TOKEN,
+  LOGOUT,
   SIGN_UP,
-  VERIFY_ACCOUNT,
   loginSuccess,
-  loginError,
-  accVerifySuccess
+  loginFailure,
+  logoutSuccess
 } from 'actions/login';
 import Notification from '../components/Notification';
+import {
+  setAuthToken
+} from '../globals/interceptors';
 
 export default function* loginSaga() {
   yield takeLatest(LOGIN, login);
   yield takeLatest(LOGIN_SUCCESS, onLoginSuccess);
   yield takeLatest(SIGN_UP, onSignUp);
-  yield takeLatest(VERIFY_ACCOUNT, onVerifyAccount);
+  yield takeLatest(LOGOUT, logout);
 }
 
 function* login(action) {
   const {
     payload
   } = action;
-  console.log('payload', payload);
   try {
     const response = yield call(axios, '/users/login', {
       method: 'POST',
@@ -38,7 +42,7 @@ function* login(action) {
     yield put(loginSuccess(response));
   } catch (e) {
     Notification('error', 'Login request failed. Please try again.');
-    // yield put(loginError(e));
+    yield put(loginFailure(e));
     console.error('Login failed', e);
   }
 }
@@ -46,6 +50,7 @@ function* login(action) {
 function* onLoginSuccess(action) {
   const data = action.payload;
   cacheAuthToken(data);
+  setAuthToken(data.authToken);
   history.push('/home');
 }
 
@@ -53,7 +58,6 @@ function* onSignUp(action) {
   const {
     payload
   } = action;
-  console.log('payload', payload);
   try {
     const response = yield call(axios, '/brand/direct-signup', {
       method: 'POST',
@@ -74,21 +78,18 @@ function* onSignUp(action) {
   }
 }
 
-function* onVerifyAccount(action) {
-  const {
-    payload
-  } = action;
-  console.log('payload', payload);
+function* logout() {
   try {
-    const response = yield call(axios, '/brand/verify-token', {
+    const response = yield call(axios, '/users/logout', {
       method: 'POST',
-      data: payload
+      data: {}
     });
-    // yield put(accVerifySuccess(payload))
+    yield put(logoutSuccess(response));
+    window.localStorage.removeItem(LOGIN_TOKEN);
+    history.push('/');
   } catch (e) {
-    Notification('error', 'Account verification link already visited.');
-    // yield put(loginError(e));
-    console.error('Account verification failed', e);
+    Notification('error', 'Logout failed. Please try again.');
+    console.error('Logout failed', e);
   }
 }
 

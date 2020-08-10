@@ -41,7 +41,7 @@ const Login = () => {
                         <div className="input-section">
                             <input
                                 className="input-text"
-                                className={classNames('input-text', { 'error-border': errors.email })}
+                                className={classNames('input-text', { 'error-border': errors.name })}
 
                                 type='text'
                                 name="name"

@@ -10,7 +10,6 @@ import {
   updateBrandError,
   updateBrandSuccess,
   getCandidateByIdSuccess,
-  voteForCandidate,
   GET_CANDIDATES,
   UPDATE_BRAND,
   GET_CANDIDATE_BY_ID,
@@ -93,7 +92,7 @@ function* voteForCandidateByUserId(action) {
 
 function* loadUser() {
   try {
-    const token = window.localStorage.getItem('hfc-login-token')
+    const token = window.localStorage.getItem('coda-login-token')
     const loginAuth = JSON.parse(token);
     const response = yield call(axios, `/users/token/${loginAuth.authToken}`);
     yield put(loginSuccess(response));
